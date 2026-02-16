@@ -16,13 +16,12 @@ COPY ["./ETL.csproj", "ETL/"]
 RUN dotnet restore "./ETL/ETL.csproj"
 COPY . .
 WORKDIR "/src/ETL"
-RUN dotnet build "./ETL.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./ETL/ETL.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-WORKDIR "/src/ETL"
-RUN dotnet publish "./ETL.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./ETL/ETL.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
