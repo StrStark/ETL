@@ -15,7 +15,7 @@ WORKDIR /src
 COPY ["./ETL.csproj", "ETL/"]
 RUN dotnet restore "./ETL/ETL.csproj"
 COPY . .
-RUN dotnet build "./ETL/ETL.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "/ETL/ETL.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
