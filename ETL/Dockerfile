@@ -12,7 +12,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:10.0-alpine AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["ETL/ETL.csproj", "ETL/"]
+COPY ["./ETL.csproj", "ETL/"]
 RUN dotnet restore "./ETL/ETL.csproj"
 COPY . .
 WORKDIR "/src/ETL"
