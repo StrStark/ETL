@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/build/">
+    <File Path="docker-compose.yml" />
+  </Folder>
+  <Project Path="ETL/ETL.csproj" />
+</Solution>

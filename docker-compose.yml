@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  BineshBack:
+    build:
+      context: ./ETL/
+      dockerfile: Dockerfile
+    image: etl:latest
+    ports:
+      - "800:8080"
+      - "801:8081"
+    environment:
+      CONN_STRING: "Host=BineshDb;Port=5432;Database=BineshDb;Username=StrStark;Password=Mr5568###"
+      ETL_DB: >
+              Data Source=DESKTOP-KVHBHO8\\STRSTARK;
+              Integrated Security=True;
+              Persist Security Info=False;
+              Pooling=False;
+              MultipleActiveResultSets=False;
+              Encrypt=True;
+              TrustServerCertificate=True;
+              Application Name="SQL Server Management Studio";
+              Command Timeout=0    
+    depends_on:
+      - BineshDb
+
+  BineshDb:
+    image: postgres:latest
+    container_name: BineshDb
+    restart: always
+    environment:
+      POSTGRES_DB: BineshDb
+      POSTGRES_USER: StrStark
+      POSTGRES_PASSWORD: Mr5568###
+    volumes:
+      - db_ETL_data:/var/lib/postgresql
+
+volumes:
+  db_ETL_data:
