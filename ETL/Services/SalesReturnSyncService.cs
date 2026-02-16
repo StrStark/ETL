@@ -137,6 +137,10 @@ public partial class SalesReturnSyncService : IEntitySyncService
         await _db.SaleReturnRecords.AddRangeAsync(snapshot.Cast<SaleReturnRecordModel>(), ct);
         await _db.SaveChangesAsync(ct);
     }
+    public async Task ClearSnapshot(CancellationToken ct)
+    {
+        await _db.SaleReturnRecords.ExecuteDeleteAsync(ct);
+    }
     private string GetSyncKey(SaleReturnRecordModel value)
     {
         if (value == null)

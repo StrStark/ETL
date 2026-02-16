@@ -80,6 +80,11 @@ public partial class FinancialSyncService : IEntitySyncService
         await _db.HesabRecords.AddRangeAsync(snapshot.Cast<HesabSummaryModel>(), ct);
         await _db.SaveChangesAsync(ct);
     }
+
+    public async Task ClearSnapshot(CancellationToken ct)
+    {
+        await _db.HesabRecords.ExecuteDeleteAsync(ct);
+    }
     private string GetSyncKey(HesabSummaryModel value)
     {
         if (value == null)

@@ -106,6 +106,10 @@ public partial class ProductSyncService : IEntitySyncService
         await _db.ProductRecords.AddRangeAsync(snapshot.Cast<AnbarResidHavaleDetailModel>(), ct);
         await _db.SaveChangesAsync(ct);
     }
+    public async Task ClearSnapshot(CancellationToken ct)
+    {
+        await _db.ProductRecords.ExecuteDeleteAsync(ct);
+    }
     private string GetSyncKey(AnbarResidHavaleDetailModel value)
     {
         if (value == null)
